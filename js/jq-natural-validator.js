@@ -1,6 +1,7 @@
 /**
  * Minimal jQuery Natural validator
  * ================================
+ * https://github.com/GiuB/jquery-validate-form-submit
  *
  * How it works:
  * This library is simply & customizable, validate input with a data-validate-* attribute
