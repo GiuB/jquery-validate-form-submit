@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>Natural jQuery Form Validation & Submit</title>
+
+		<!-- Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+
+		<!-- Bootstrap -->
+    	<link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    	<!-- Custom -->
+		<link rel="stylesheet" href="css/style.css">
+		<style>
+			body { font-family: 'Open Sans', sans-serif; }
+		</style>
+
+		<!-- jQ -->
+		<script src="components/jquery/dist/jquery.js"></script>
+	</head>
+	<body>
+		<div class="content">
+			<h1 class="text-center">Natural jQuery Form Validation & Submit</h1>
+			<div class="form-container">
+				<form class="jqValidator" method="POST">
+					<fieldset>
+						<legend>Test form:</legend>
+						<div class="row">
+							<div class="col-sm-6 form-group">
+								<label for="name">Name</label>
+								<input id="name" name="name" data-jqv-min-length="3" class="form-control" type="text" />
+							</div>
+							<div class="col-sm-6 form-group">
+								<label for="email">Email</label>
+								<input id="email" name="email" data-jqv-email="true" data-jqv-not-empty class="form-control" type="text" />
+							</div>
+						</div>
+						<input class="btn btn-primary" type="submit" value="Submit" />
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+		<!-- js -->
+		<script src="js/jq-natural-validator.js"></script>
+		<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<!-- Example integration -->
+		<script>
+		jQuery(document).ready(function($) {
+			$("form.jqValidator").jQNaturalValidator();
+		});
+		</script>
+	</body>
+</html>
