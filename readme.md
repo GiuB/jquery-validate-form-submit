@@ -91,7 +91,7 @@ Spinner integration example:
 <script>
 jQuery(document).ready(function($) {
 	$("form").jQNaturalValidator({
-		spinnerEl: ''
+		spinnerEl: $("form #spinner")
 	});
 });
 </script>
