@@ -3,7 +3,8 @@
 		<title>Natural jQuery Form Validation & Submit</title>
 
 		<!-- Fonts -->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link href="components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
 		<!-- Bootstrap -->
     	<link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +21,9 @@
 	<body>
 		<div class="content">
 			<h1 class="text-center">Natural jQuery Form Validation & Submit</h1>
+			<h5 class="text-center"><i class="fa fa-github"></i> <em><a href="https://github.com/GiuB/jquery-validate-form-submit" target="_blank">https://github.com/GiuB/jquery-validate-form-submit</a></em></h5>
+			<h6 class="text-center"><i class="fa fa-download"></i> <em><a href="https://raw.githubusercontent.com/GiuB/jquery-validate-form-submit/master/js/jq-natural-validator.js" target="_blank">http://git.io/vc8vA</a></em></h6>
+
 			<div class="form-container">
 				<form class="jqValidator" method="POST">
 					<fieldset>
@@ -32,6 +36,11 @@
 							<div class="col-sm-6 form-group">
 								<label for="email">Email</label>
 								<input id="email" name="email" data-jqv-email="true" data-jqv-not-empty class="form-control" type="text" />
+							</div>
+							<div class="col-sm-12 form-group">
+								<input id="privacy" name="privacy" data-jqv-checked class="form-
+								control" type="checkbox" />
+								<label for="privacy">Privacy</label>
 							</div>
 						</div>
 						<input class="btn btn-primary" type="submit" value="Submit" />
@@ -47,7 +56,9 @@
 		<!-- Example integration -->
 		<script>
 		jQuery(document).ready(function($) {
-			$("form.jqValidator").jQNaturalValidator();
+			$("form.jqValidator").jQNaturalValidator({
+				disableSubmitBtnOnError: true
+			});
 		});
 		</script>
 	</body>

@@ -26,6 +26,9 @@
         base.$el = $(el);
         base.el = el;
 
+        // Store bool valid form
+        base.isValid = false;
+
         // Store fields to validate
         base.fields = [];
 
@@ -45,6 +48,9 @@
 
             // Check on keyPress
             base.validateOnKeyPress();
+
+            // Toggle [disabled] submitBtn if necessary
+    		base.submitBtnHandler();
         };
 
         /*
@@ -62,6 +68,35 @@
         };
 
         /*
+         * Disable submitButton if formTestCheck is false
+         * Used on option.disableSubmitBtnOnError: true
+         */
+        base.submitBtnHandler = function() {
+        	if(!base.options.disableSubmitBtnOnError)
+        		return;
+
+        	var submitBtn = base.$el.find('*[type="submit"]');
+
+        	// Check if form isValid
+        	base.formTestCheck();
+
+        	// Add | Remove "disabled" on submit btn
+        	if(base.isValid && submitBtn.attr("disabled"))
+        		submitBtn.removeAttr("disabled");
+        	else if(!base.isValid && !submitBtn.attr("disabled"))
+        		submitBtn.attr("disabled", "disabled");
+        };
+
+        /*
+         * TestCheck the entire form
+         * Than store result in base.isValid
+         * Used on option.disableSubmitBtnOnError: true
+         */
+        base.formTestCheck = function() {
+        	return base.isValid = base.formValidationHandler("testSubmit");
+        };
+
+        /*
          * Store fields to validate
          */
         base.storeFieldsToValidate = function() {
@@ -75,6 +110,7 @@
 
         /*
          * Store fields to validate
+         * Call submitBtnHandler to toggle submit disabled
          */
         base.validateOnKeyPress = function() {
         	if(base.fields.length <= 0)
@@ -82,7 +118,12 @@
 
         	$.each(base.fields, function(i, el) {
         		el.bind("change focusout keydown keyup", function(e) {
+
+        			// Validate field
         			base.singleFieldValidationHandler(el, "keyPress");
+
+        			// Toggle [disabled] submitBtn if necessary
+        			base.submitBtnHandler();
         		});
         	});
         };
@@ -125,13 +166,25 @@
         		// Check field & stop check at first wrong input
         		if(base.options.stepCheck) {
         			isValid = base.singleFieldValidationHandler(el, type);
-	    			if(!isValid) return isValid;
+
+        			// Invalid behaviour
+	    			if(!isValid) {
+	    				if(base.options.focusOnSubmitError && type == 'submit')
+	    					el.focus(); // autoFocus
+
+	    				return isValid;
+    				}
         		}
 
         		// Check every wrong field
     			else {
     				tmpVaild = base.singleFieldValidationHandler(el, type);
-    				if(!tmpVaild) isValid = tmpVaild;
+    				if(!tmpVaild && isValid) {
+    					isValid = tmpVaild;
+
+    					if(base.options.focusOnSubmitError && type == 'submit')
+	    					el.focus(); // autoFocus
+					}
     			}
     		});
 
@@ -176,6 +229,10 @@
 						if(el.val().length <= 0)
 							isValid = false;
         				break;
+    				case "jqvChecked":
+    					if(!el.prop("checked"))
+    						isValid = false;
+    					break;
 	        	}
         	});
 
@@ -269,6 +326,8 @@
         domFields: true, 				// Change to false to check fields on evrey validation request
         KeyPressValidation: true,		// Change to false to check form only on submit
         stepCheck: true,                // Change to false to check every input on submit (not the first wrong)
+        focusOnSubmitError: true,		// Change to false to prevent autoFocus on field validation error
+        disableSubmitBtnOnError: true, // Change to false to disable submit button if form is inValid
 
         // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
         validFieldFunction: '', 		// Override default bootstrap validField css with you Function
@@ -280,7 +339,8 @@
     	attrs: {
     		"jqv-min-length": 3,
     		"jqv-email": true,
-    		"jqv-not-empty": true
+    		"jqv-not-empty": true,
+    		"jqv-checked": true
     	},
 
     	// Main regex (used with some field validation)

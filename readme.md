@@ -34,6 +34,8 @@ Options:
     domFields: true, 				// Change to false to check fields on evrey validation request
     KeyPressValidation: true,		// Change to false to check form only on submit
     stepCheck: true,                // Change to false to check every input on submit (not the first wrong)
+    focusOnSubmitError: true,		// Change to false to prevent autoFocus on field validation error
+    disableSubmitBtnOnError: true, // Change to false to disable submit button if form is inValid
 
     // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
     validFieldFunction: '', 		// Override default bootstrap validField css with you Function
@@ -45,7 +47,8 @@ Options:
 	attrs: {
 		"jqv-min-length": 3,
 		"jqv-email": true,
-		"jqv-not-empty": true
+		"jqv-not-empty": true,
+		"jqv-checked": true
 	},
 
 	// Main regex (used with some field validation)
@@ -54,6 +57,7 @@ Options:
 	}
 }
 ```
+
 ##  Valid / Error Function Override
 
 To add your favourite validation system edit this plugin at `base.validFieldWrapper` and `base.errorFieldWrapper`

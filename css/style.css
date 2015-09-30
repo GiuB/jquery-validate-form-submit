@@ -1,2 +1,9 @@
 body { background-color: #f2f2f2; width: 100%; }
 .form-container { max-width: 600px; margin: 80px auto 0 auto; }
+
+/* Checkbox focus */
+input[type="checkbox"] { border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; }
+input[type="checkbox"]:focus { box-shadow: 1px 1px 1px #C2C2C2; -webkit-box-shadow: 1px 1px 1px #C2C2C2; -moz-box-shadow: 1px 1px 1px #C2C2C2; }
+.form-group.has-error input[type="checkbox"] { box-shadow: 1px 1px 1px #B62525; -webkit-box-shadow: 1px 1px 1px #B62525; -moz-box-shadow: 1px 1px 1px #B62525; }
+.form-group.has-success input[type="checkbox"] { box-shadow: 1px 1px 1px #2E5F2F; -webkit-box-shadow: 1px 1px 1px #2E5F2F; -moz-box-shadow: 1px 1px 1px #2E5F2F; }
+.form-group.has-warning input[type="checkbox"] { box-shadow: 1px 1px 1px #E27B4F; -webkit-box-shadow: 1px 1px 1px #E27B4F; -moz-box-shadow: 1px 1px 1px #E27B4F; }
