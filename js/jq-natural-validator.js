@@ -181,7 +181,7 @@
 
         	// Add field Error|Valid css
         	if(isValid)
-    			base.validateFieldWrapper(el, type);
+    			base.validFieldWrapper(el, type);
     		else
     			base.errorFieldWrapper(el, type);
 
@@ -194,9 +194,13 @@
          * @param {obj} el: $(element)
          * @param {str} type: "submit" | "keyPress"
          */
-    	base.validateFieldWrapper = function(el, type) {
-    		if(base.options.tpl == "bootstrap")
-    			base.validateBootstrapField(el, type);
+    	base.validFieldWrapper = function(el, type) {
+
+    		// Use custom validFieldFunction || next with default
+    		if($.isFunction(base.options.validFieldFunction))
+    			base.options.validFieldFunction(el, type);
+    		else if(base.options.tpl == "bootstrap")
+    			base.validBootstrapField(el, type);
     	};
 
     	/*
@@ -206,7 +210,11 @@
          * @param {str} type: "submit" | "keyPress"
          */
     	base.errorFieldWrapper = function(el, type) {
-    		if(base.options.tpl == "bootstrap")
+
+    		// Use custom errorFieldFunction || next with default
+    		if($.isFunction(base.options.errorFieldFunction))
+    			base.options.errorFieldFunction(el, type);
+    		else if(base.options.tpl == "bootstrap")
     			base.errorBootstrapField(el, type);
     	};
 
@@ -216,7 +224,7 @@
          * @param {obj} el: $(element)
          * @param {str} type: "submit" | "keyPress"
          */
-    	base.validateBootstrapField = function(el, type) {
+    	base.validBootstrapField = function(el, type) {
 			var field = el.closest(".form-group");
 
 			if(field.hasClass("has-error")) field.removeClass("has-error");
@@ -261,6 +269,12 @@
         domFields: true, 				// Change to false to check fields on evrey validation request
         KeyPressValidation: true,		// Change to false to check form only on submit
         stepCheck: true,                // Change to false to check every input on submit (not the first wrong)
+
+        // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
+        validFieldFunction: '', 		// Override default bootstrap validField css with you Function
+
+        // Override error Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
+		errorFieldFunction: '', 		// Override default bootstrap errorField css with you Function
 
         // [data-*] get validation opts from html attributes
     	attrs: {
