@@ -62,7 +62,13 @@
         		e.preventDefault();
 
         		if(base.formValidationHandler('submit')) {
-        			base.$el.unbind("submit").submit();
+        			if(base.options.spinnerEl.length)
+        				base.options.spinnerEl.show(); // Show Spinner
+
+        			// Submit
+        			setTimeout(function() {
+        				base.$el.unbind("submit").submit();
+        			}, 1000);
         		}
         	});
         };
@@ -340,6 +346,7 @@
         focusOnSubmitError: true,		// Change to false to prevent autoFocus on field validation error
         disableSubmitBtnOnError: true,  // Change to false to disable submit button if form is inValid
         autoTrimCheck: true, 			// Change to false to disable autoTrim on validation check
+        spinnerEl: '', 					// Inject here spinner element, at submit this will be show
 
         // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
         validFieldFunction: '', 		// Override default bootstrap validField css with you Function
