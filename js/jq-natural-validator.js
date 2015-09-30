@@ -66,9 +66,7 @@
         				base.options.spinnerEl.show(); // Show Spinner
 
         			// Submit
-        			setTimeout(function() {
-        				base.$el.unbind("submit").submit();
-        			}, 1000);
+    				base.$el.unbind("submit").submit();
         		}
         	});
         };
@@ -347,6 +345,9 @@
         disableSubmitBtnOnError: true,  // Change to false to disable submit button if form is inValid
         autoTrimCheck: true, 			// Change to false to disable autoTrim on validation check
         spinnerEl: '', 					// Inject here spinner element, at submit this will be show
+
+        // Override submit Function (example: inject an ajax send function)
+        submitFunction: '',
 
         // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
         validFieldFunction: '', 		// Override default bootstrap validField css with you Function
