@@ -218,7 +218,7 @@
         		// Validate this attr (check in camelCase way)
 	        	switch(attr) {
 	        		case "jqvMinLength":
-	        			if(el.val().length < parseInt(attrVal, 10))
+	        			if(base.trim(el.val()).length < parseInt(attrVal, 10))
 	        				isValid = false;
 	        			break;
         			case "jqvEmail":
@@ -226,7 +226,7 @@
     						isValid = false;
     					break;
 					case "jqvNotEmpty":
-						if(el.val().length <= 0)
+						if(base.trim(el.val()).length <= 0)
 							isValid = false;
         				break;
     				case "jqvChecked":
@@ -244,6 +244,17 @@
 
     		return isValid;
         };
+
+        /*
+         * autoTrim Field Wrapper if options.autoTrimCheck: true
+         *
+         * @param {str} str
+         */
+        base.trim = function(str) {
+        	if(base.options.autoTrimCheck)
+        		return $.trim(str);
+        	return str;
+        }
 
     	/*
          * validateField Wrapper
@@ -327,7 +338,8 @@
         KeyPressValidation: true,		// Change to false to check form only on submit
         stepCheck: true,                // Change to false to check every input on submit (not the first wrong)
         focusOnSubmitError: true,		// Change to false to prevent autoFocus on field validation error
-        disableSubmitBtnOnError: true, // Change to false to disable submit button if form is inValid
+        disableSubmitBtnOnError: true,  // Change to false to disable submit button if form is inValid
+        autoTrimCheck: true, 			// Change to false to disable autoTrim on validation check
 
         // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
         validFieldFunction: '', 		// Override default bootstrap validField css with you Function

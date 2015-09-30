@@ -1,4 +1,4 @@
-# jQuery Natural Form Validator
+# Natural jQuery Form Validator
 
 Simple html & js to use a natural jQuery validation.
 It natively works with bootstrap css validation.
@@ -35,7 +35,8 @@ Options:
     KeyPressValidation: true,		// Change to false to check form only on submit
     stepCheck: true,                // Change to false to check every input on submit (not the first wrong)
     focusOnSubmitError: true,		// Change to false to prevent autoFocus on field validation error
-    disableSubmitBtnOnError: true, // Change to false to disable submit button if form is inValid
+    disableSubmitBtnOnError: true,  // Change to false to disable submit button if form is inValid
+    autoTrimCheck: true, 			// Change to false to disable autoTrim on validation check
 
     // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
     validFieldFunction: '', 		// Override default bootstrap validField css with you Function
