@@ -65,8 +65,11 @@
         			if(base.options.spinnerEl.length)
         				base.options.spinnerEl.show(); // Show Spinner
 
-        			// Submit
-    				base.$el.unbind("submit").submit();
+        			// Submit [customFunction | defaultSubmit]
+        			if($.isFunction(base.options.submitFunction))
+        				base.options.submitFunction();
+    				else
+    					base.$el.unbind("submit").submit();
         		}
         	});
         };

@@ -39,6 +39,9 @@ Options:
     autoTrimCheck: true, 			// Change to false to disable autoTrim on validation check
     spinnerEl: '', 					// Inject here spinner element, at submit this will be show
 
+    // Override submit Function (example: inject an ajax send function)
+    submitFunction: '',
+
     // Override validtion Function (@params: el, validation_type ['submit' | 'keyPress' | 'testSubmit'])
     validFieldFunction: '', 		// Override default bootstrap validField css with you Function
 
@@ -89,6 +92,30 @@ Spinner integration example:
 jQuery(document).ready(function($) {
 	$("form").jQNaturalValidator({
 		spinnerEl: ''
+	});
+});
+</script>
+```
+
+## Override the custom submit function (usefull on ajax data submit)
+
+An ajax submit Function example:
+
+```html
+<script>
+jQuery(document).ready(function($) {
+	$("form").jQNaturalValidator({
+		submitFunction: function() {
+			$.ajax({
+				url: "save.php",
+				type: "POST",
+				data: {
+					name:  $("#name").val(),
+					email: $("#email").val()
+				}
+			})
+			.success(function(result) { alert("data saved"); })
+		}
 	});
 });
 </script>
