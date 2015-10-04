@@ -22,6 +22,18 @@ jQuery(document).ready(function($) {
 </script>
 ```
 
+To validate your input fields you must add a data-attribute with a value (optional).
+You can see some typical integration in index.html.
+
+Here the data-attributes list:
+
+```html
+data-jqv-min-length				 	@default 3
+data-jqv-email				 		@default true
+data-jqv-not-empty				 	@default true
+data-jqv-checked				 	@default true
+```
+
 ## Options
 
 There are many simple options, if you must to add some functionality, this library was created to be easy and customizable, so ... do that!
